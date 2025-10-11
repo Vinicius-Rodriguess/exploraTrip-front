@@ -1,6 +1,7 @@
 import HomeCard from "@/components/HomeCard/HomeCard";
 import styles from "./app.module.scss";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -21,8 +22,8 @@ export default function Home() {
             </p>
           </div>
           <div className={styles.wrapperBtns}>
-            <button className={styles.btnStartNow}>Começar agora</button>
-            <button className={styles.btnLogin}>Entrar</button>
+            <Link href={"/cadastro"} className={styles.btnStartNow}>Começar agora</Link>
+            <Link href={"/login"} className={styles.btnLogin}>Entrar</Link>
           </div>
         </div>
         <div className={styles.wrapperCards}>
