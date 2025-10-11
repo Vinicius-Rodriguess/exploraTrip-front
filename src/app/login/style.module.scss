@@ -1,0 +1,192 @@
+@use "@/styles/variables" as *;
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: $primary100;
+  background-image: url("/assets/login.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapperForm {
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  gap: 36px;
+  padding: 60px 45px;
+  background: #fcffff66;
+  backdrop-filter: blur(12px);
+  box-shadow: 0px 4px 4px 0px #012a4a26;
+
+  .header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    align-items: center;
+    text-align: center;
+
+    h1 {
+      font-family: "Petrona", sans-serif;
+      font-weight: 500;
+      font-size: 32px;
+      color: $primary800;
+    }
+  }
+
+  .form {
+    width: 100%;
+
+    .wrapperInputs {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+      width: 100%;
+
+      .inputContainer {
+        position: relative;
+        width: 100%;
+        font-size: 16px;
+
+        input {
+          width: 100%;
+          padding: 12px 16px;
+          background-color: $neutros050;
+          font-size: 16px;
+          border: none;
+          border-bottom: 1px solid $neutros900;
+          border-radius: 4px 4px 0 0;
+          outline: none;
+        }
+
+        label {
+          position: absolute;
+          left: 16px;
+          top: 12px;
+          color: $neutros900;
+          pointer-events: none;
+          transition: all 0.2s ease;
+          font-size: 16px;
+        }
+
+        /* Sobe o label quando o campo está em foco ou preenchido */
+        input:focus + label,
+        input:not(:placeholder-shown) + label {
+          top: 1px;
+          font-size: 12px;
+          color: $primary600;
+        }
+
+        .spanBar {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          height: 2px;
+          width: 0;
+          background-color: $primary600;
+          transition: width 0.3s ease-in-out;
+        }
+
+        input:focus + label + .spanBar {
+          width: 100%;
+        }
+      }
+    }
+
+    .wrapperOptions {
+      display: flex;
+      padding-top: 15px;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+
+      a {
+        font-size: 14px;
+        color: $primary800;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .checkboxLabel {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-weight: 500;
+        font-size: 14px;
+        color: $primary800;
+        cursor: pointer;
+        position: relative;
+
+        input {
+          appearance: none;
+          width: 16px;
+          height: 16px;
+          border: 2px solid $primary800;
+          border-radius: 4px;
+          background-color: transparent;
+          cursor: pointer;
+          position: relative;
+          transition: all 0.2s ease;
+
+          &:checked {
+            background-color: $primary600;
+            border-color: $primary600;
+          }
+
+          &:checked::after {
+            content: "";
+            position: absolute;
+            left: 4px;
+            top: 0px;
+            width: 4px;
+            height: 8px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+          }
+        }
+      }
+    }
+
+    .wrapperActions {
+      display: flex;
+      flex-direction: column;
+      padding-top: 36px;
+      gap: 16px;
+      justify-content: center;
+      align-items: center;
+
+      button {
+        padding: 10px 20px;
+        border-radius: 4px;
+        border: 1px solid;
+        color: $neutros050;
+        border-image-source: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.14) 0%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        background: linear-gradient(0deg, #013a63, #013a63),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 100%);
+        box-shadow: 0px 0px 0px 1px #013a63;
+        box-shadow: 0px 1px 2px 0px #181c1d80;
+      }
+
+      p {
+        font-weight: 700;
+        font-size: 14px;
+        color: $primary800;
+      }
+
+      a {
+        color: $primary800;
+      }
+    }
+  }
+}
