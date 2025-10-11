@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import styles from "./homeCard.module.scss";
+import styles from "./HomeCard.module.scss";
 
 interface HomeCardProps {
   img: string;

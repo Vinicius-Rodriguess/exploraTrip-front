@@ -1,42 +1,34 @@
 import Image from "next/image";
-import style from "./login.module.scss";
+import style from "./cadastro.module.scss";
 import FormInput from "@/components/FormInput/FormInput";
 
-export default function login() {
+export default function Cadastro() {
   return (
     <h1 className={style.container}>
       <div className={style.wrapperForm}>
         <div className={style.header}>
           <Image
-            src="/assets/logo_exploraTrip.png"
+            src="/assets/logo_exploraTrip_simple.png"
             alt="Logo Explora Trip"
-            width={143}
-            height={70}
+            width={173}
+            height={50}
           />
           <h1>
-            Bem-vindo de volta, <br /> pronto para a próxima viagem?
+            Crie sua conta e explore <br/> novos destinos
           </h1>
         </div>
         <form action="#" className={style.form}>
           <div className={style.wrapperInputs}>
             <FormInput label="Usuário" name="user" />
+            <FormInput label="Email" name="text" type="text" />
             <FormInput label="Senha" name="password" type="password" />
-          </div>
-
-          <div className={style.wrapperOptions}>
-            <label className={style.checkboxLabel}>
-              <input type="checkbox" name="keepConect" id="keepConect" />
-              <span className={style.customCheck}></span>
-              Mantenha-me conectado
-            </label>
-
-            <a href="#">Esqueci minha senha</a>
+            <FormInput label="Confirmar senha" name="password" type="password" />
           </div>
 
           <div className={style.wrapperActions}>
-            <button type="submit">Embarcar</button>
+            <button type="submit">Cadastrar</button>
             <p>
-              Não possui uma conta? <a href="#">Cadastre-se</a>
+              Já tem cadastro? <a href="#">Entrar</a>
             </p>
           </div>
         </form>
