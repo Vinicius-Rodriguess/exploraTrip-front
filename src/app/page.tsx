@@ -1,5 +1,5 @@
-import HomeCard from "@/components/homeCard";
-import styles from "./page.module.scss";
+import HomeCard from "@/components/HomeCard/HomeCard";
+import styles from "./app.module.scss";
 import Image from "next/image";
 
 export default function Home() {
