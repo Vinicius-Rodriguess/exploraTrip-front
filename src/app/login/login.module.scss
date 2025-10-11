@@ -48,55 +48,6 @@
       justify-content: center;
       gap: 24px;
       width: 100%;
-
-      .inputContainer {
-        position: relative;
-        width: 100%;
-        font-size: 16px;
-
-        input {
-          width: 100%;
-          padding: 12px 16px;
-          background-color: $neutros050;
-          font-size: 16px;
-          border: none;
-          border-bottom: 1px solid $neutros900;
-          border-radius: 4px 4px 0 0;
-          outline: none;
-        }
-
-        label {
-          position: absolute;
-          left: 16px;
-          top: 12px;
-          color: $neutros900;
-          pointer-events: none;
-          transition: all 0.2s ease;
-          font-size: 16px;
-        }
-
-        /* Sobe o label quando o campo está em foco ou preenchido */
-        input:focus + label,
-        input:not(:placeholder-shown) + label {
-          top: 1px;
-          font-size: 12px;
-          color: $primary600;
-        }
-
-        .spanBar {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          height: 2px;
-          width: 0;
-          background-color: $primary600;
-          transition: width 0.3s ease-in-out;
-        }
-
-        input:focus + label + .spanBar {
-          width: 100%;
-        }
-      }
     }
 
     .wrapperOptions {
