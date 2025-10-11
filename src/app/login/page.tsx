@@ -1,6 +1,7 @@
 import Image from "next/image";
 import style from "./login.module.scss";
 import FormInput from "@/components/FormInput/FormInput";
+import Link from "next/link";
 
 export default function login() {
   return (
@@ -36,7 +37,7 @@ export default function login() {
           <div className={style.wrapperActions}>
             <button type="submit">Embarcar</button>
             <p>
-              Não possui uma conta? <a href="#">Cadastre-se</a>
+              Não possui uma conta? <Link href={"/cadastro"}>Cadastre-se</Link>
             </p>
           </div>
         </form>

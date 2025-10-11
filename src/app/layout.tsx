@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "../styles/globals.scss";
+import { AppToaster } from "@/utils/toaster";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,6 +16,7 @@ export default function RootLayout({
     <html lang="pt-br">
       <body>
         {children}
+        <AppToaster/>
       </body>
     </html>
   );
