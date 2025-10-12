@@ -1,0 +1,48 @@
+@use "@/styles/variables" as *;
+
+.container {
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 100px;
+}
+
+.wrapperImg {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+}
+
+.wrapperContent {
+  width: 100%;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: end;
+
+  p {
+    font-weight: 400;
+    font-size: 14px;
+    color: $neutros900;
+  }
+
+  .link {
+    display: flex;
+    gap: 16px;
+    color: $primary900;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+  button {
+    border: none;
+    display: flex;
+    gap: 16px;
+    color: $primary900;
+    font-weight: 600;
+    font-size: 14px;
+    background-color: transparent;
+  }
+}
