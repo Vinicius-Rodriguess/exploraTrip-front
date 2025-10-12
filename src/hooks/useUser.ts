@@ -41,5 +41,18 @@ export function useUser() {
     await userService.registerUser({ name, emailVal, password });
   };
 
-  return { user, login, logout, register };
+  const verifyEmail = async (code: string) => {
+    if (!user?.id) throw new Error("Usuário não encontrado na sessão");
+
+    await userService.confirmCode(user.id, {
+      email: user.emailVal,
+      code: Number(code),
+    });
+  };
+
+  const resetPassword = async (payload: { oldPassword: string; newPassword: string }) => {
+    await userService.resetPassword(payload);
+  };
+
+  return { user, login, logout, register, verifyEmail, resetPassword };
 }
