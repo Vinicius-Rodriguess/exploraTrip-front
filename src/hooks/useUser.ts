@@ -50,5 +50,9 @@ export function useUser() {
     });
   };
 
-  return { user, login, logout, register, verifyEmail };
+  const resetPassword = async (payload: { oldPassword: string; newPassword: string }) => {
+    await userService.resetPassword(payload);
+  };
+
+  return { user, login, logout, register, verifyEmail, resetPassword };
 }
