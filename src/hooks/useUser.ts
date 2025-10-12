@@ -54,5 +54,17 @@ export function useUser() {
     await userService.resetPassword(payload);
   };
 
-  return { user, login, logout, register, verifyEmail, resetPassword };
+  const forgotPassword = async (email: string, data: { password: string }) => {
+    await userService.forgotPassword(email, data);
+  };
+
+  return {
+    user,
+    login,
+    logout,
+    register,
+    verifyEmail,
+    resetPassword,
+    forgotPassword,
+  };
 }
