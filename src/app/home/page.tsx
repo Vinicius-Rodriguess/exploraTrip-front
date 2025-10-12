@@ -14,11 +14,11 @@ export default function Home() {
         <h1>Olá, {user?.name ?? "usuário"}</h1>
         <p>Parece que você ainda não tem nenhuma viagem :(</p>
         <div className={style.wrapperBtns}>
-          <Link href={"#"} className={style.btnCreate}>
-            Começar agora
+          <Link href={"/criar-viagem"} className={style.btnCreate}>
+            Criar nova viagem
           </Link>
           <Link href={"#"} className={style.btnTrips}>
-            Entrar
+            Minhas viagens
           </Link>
         </div>
       </div>
