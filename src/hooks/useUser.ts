@@ -41,5 +41,14 @@ export function useUser() {
     await userService.registerUser({ name, emailVal, password });
   };
 
-  return { user, login, logout, register };
+  const verifyEmail = async (code: string) => {
+    if (!user?.id) throw new Error("Usuário não encontrado na sessão");
+
+    await userService.confirmCode(user.id, {
+      email: user.emailVal,
+      code: Number(code),
+    });
+  };
+
+  return { user, login, logout, register, verifyEmail };
 }
