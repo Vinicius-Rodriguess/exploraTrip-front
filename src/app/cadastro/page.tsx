@@ -44,7 +44,7 @@ export default function Cadastro() {
       await registerUser(data.name, data.emailVal, data.password);
 
       toast.success("Cadastro realizado com sucesso!");
-      router.push("/"); // redireciona para home
+      router.push("/");
     } catch (err) {
       console.error(err);
       toast.error("Erro ao cadastrar usuário. Tente novamente.");
