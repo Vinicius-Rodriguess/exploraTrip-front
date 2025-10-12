@@ -1,0 +1,109 @@
+@use "@/styles/variables" as *;
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: $primary900;
+  background-image: url("/assets/security.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapperForm {
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  gap: 36px;
+  padding: 60px 45px;
+  background: #FCFFFF0D;
+  backdrop-filter: blur(12px);
+  border: 1px solid #FCFFFF1A;
+  box-shadow: 0px 4px 4px 0px #012A4A40;
+
+
+  .header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+
+    h1 {
+      font-family: "Petrona", sans-serif;
+      font-weight: 500;
+      font-size: 32px;
+      color: $neutros050;
+    }
+
+    p {
+      font-weight: 500;
+      font-size: 12px;
+      color: $neutros050;
+    }
+  }
+
+  .form {
+    width: 100%;
+
+    .wrapperInputs {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+      width: 100%;
+    }
+
+    .wrapperActions {
+      display: flex;
+      flex-direction: column;
+      padding-top: 36px;
+      gap: 16px;
+      justify-content: center;
+      align-items: center;
+
+      button {
+        padding: 10px 20px;
+        border-radius: 4px;
+        border: 1px solid;
+        color: $primary800;
+        background-color: $neutros050;
+      }
+
+      p {
+        font-weight: 500;
+        font-size: 14px;
+        color: $neutros050;
+      }
+
+      a {
+        color: $neutros050;
+      }
+    }
+  }
+}
+
+.error {
+  color: #ffffffcc;
+  font-size: 12px;
+  margin-top: -20px;
+  margin-left: 4px;
+  display: block;
+  font-weight: 400;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-1px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
