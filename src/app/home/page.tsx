@@ -3,9 +3,14 @@ import Header from "@/components/Header/Header";
 import style from "./home.module.scss";
 import { useUser } from "@/hooks/useUser";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function Home() {
-  const { user } = useUser();
+  const { user, loginRequired, isLoading  } = useUser();
+    
+  useEffect(() => {
+    loginRequired();
+  }, [isLoading]);
 
   return (
     <div className={style.container}>

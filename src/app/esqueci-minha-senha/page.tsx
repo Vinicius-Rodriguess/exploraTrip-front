@@ -15,6 +15,7 @@ import { useUser } from "@/hooks/useUser";
 // ===================== SCHEMA =====================
 const forgotSchema = z
   .object({
+    email: z.string().email("E-mail inválido"),
     newPassword: z.string().min(6, "A nova senha deve ter no mínimo 6 caracteres"),
     confirmPassword: z.string(),
   })
@@ -28,7 +29,7 @@ type ForgotPasswordFormData = z.infer<typeof forgotSchema>;
 // ===================== COMPONENTE =====================
 export default function EsqueciMinhaSenha() {
   const router = useRouter();
-  const { user, forgotPassword } = useUser();
+  const { forgotPassword } = useUser();
 
   const {
     register,
@@ -40,14 +41,15 @@ export default function EsqueciMinhaSenha() {
 
   const onSubmit = async (data: ForgotPasswordFormData) => {
     try {
-      if (!user?.emailVal) throw new Error("E-mail do usuário não encontrado.");
+      const result = await forgotPassword(data.email, { password: data.newPassword });
 
-      await forgotPassword(user.emailVal, {
-        password: data.newPassword,
-      });
+      if (!result.success) {
+        toast.error(result.message);
+        return;
+      }
 
-      toast.success("Senha redefinida com sucesso!");
-      router.push("/login");
+      toast.success("Código enviado para o seu e-mail. Redefina a senha.");
+      router.push("/validar-email?operation=2");
     } catch (err: any) {
       console.error(err);
       toast.error(err.message || "Erro ao redefinir senha.");
@@ -64,11 +66,14 @@ export default function EsqueciMinhaSenha() {
             width={173}
             height={50}
           />
-          <h1>Nova senha</h1>
+          <h1>Redefinir senha</h1>
         </div>
 
         <form className={style.form} onSubmit={handleSubmit(onSubmit)}>
           <div className={style.wrapperInputs}>
+            <FormInput label="E-mail" type="email" {...register("email")} />
+            {errors.email && <span className={style.error}>{errors.email.message}</span>}
+
             <FormInput label="Nova senha" type="password" {...register("newPassword")} />
             {errors.newPassword && (
               <span className={style.error}>{errors.newPassword.message}</span>
@@ -86,7 +91,7 @@ export default function EsqueciMinhaSenha() {
 
           <div className={style.wrapperActions}>
             <button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Atualizando..." : "Atualizar senha"}
+              {isSubmitting ? "Atualizando..." : "Enviar código"}
             </button>
             <p>
               Já tem cadastro? <Link href="/login">Entrar</Link>

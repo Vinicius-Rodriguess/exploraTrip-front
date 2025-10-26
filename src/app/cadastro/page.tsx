@@ -39,15 +39,20 @@ export default function Cadastro() {
     resolver: zodResolver(cadastroSchema),
   });
 
+
   const onSubmit = async (data: CadastroFormData) => {
     try {
-      await registerUser(data.name, data.emailVal, data.password);
+      const result = await registerUser(data.name, data.emailVal, data.password);
 
-      toast.success("Cadastro realizado com sucesso!");
-      router.push("/");
-    } catch (err) {
+      if (result) {
+        toast.success("Cadastro realizado com sucesso!");
+        router.push("/validar-email?operation=1");
+      } else {
+        toast.error("Erro ao realizar cadastro. Por favor, tente novamente.");
+      }
+    } catch (err: any) {
       console.error(err);
-      toast.error("Erro ao cadastrar usuário. Tente novamente.");
+      toast.error(err.message || "Erro ao realizar cadastro. Por favor, tente novamente.");
     }
   };
 
