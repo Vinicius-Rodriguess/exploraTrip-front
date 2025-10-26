@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -11,20 +11,25 @@ import style from "./validar-email.module.scss";
 import FormInput from "@/components/FormInput/FormInput";
 import { useUser } from "@/hooks/useUser";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-// ===================== SCHEMA =====================
 const otpSchema = z.object({
-  code: z
-    .string()
-    .regex(/^\d{3}$/, "O código deve conter exatamente 3 números"),
+  code: z.string().regex(/^\d{3}$/, "O código deve conter exatamente 3 números"),
 });
 
 type OtpFormData = z.infer<typeof otpSchema>;
 
-// ===================== COMPONENTE =====================
 export default function ValidarEmail() {
   const router = useRouter();
   const { verifyEmail, user } = useUser();
+
+  const [operation, setOperation] = useState<number | null>(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const op = Number(params.get("operation"));
+    setOperation(Number.isNaN(op) ? null : op);
+  }, []);
 
   const {
     register,
@@ -35,8 +40,13 @@ export default function ValidarEmail() {
   });
 
   const onSubmit = async (data: OtpFormData) => {
+    if (operation === null) {
+      toast.error("Parâmetro 'operation' ausente ou inválido na URL.");
+      return;
+    }
+
     try {
-      await verifyEmail(data.code);
+      await verifyEmail(data.code, operation);
       toast.success("E-mail verificado com sucesso!");
       router.push("/login");
     } catch (err: any) {
@@ -65,9 +75,7 @@ export default function ValidarEmail() {
         <form className={style.form} onSubmit={handleSubmit(onSubmit)}>
           <div className={style.wrapperInputs}>
             <FormInput label="Código" {...register("code")} />
-            {errors.code && (
-              <span className={style.error}>{errors.code.message}</span>
-            )}
+            {errors.code && <span className={style.error}>{errors.code.message}</span>}
           </div>
 
           <div className={style.wrapperActions}>

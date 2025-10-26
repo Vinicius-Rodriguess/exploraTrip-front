@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import style from "./redefinir-senha.module.scss";
 import FormInput from "@/components/FormInput/FormInput";
 import { useUser } from "@/hooks/useUser";
+import { useEffect } from "react";
 
 // ===================== SCHEMA =====================
 const resetSchema = z
@@ -28,7 +29,11 @@ type ResetPasswordFormData = z.infer<typeof resetSchema>;
 // ===================== COMPONENTE =====================
 export default function RedefinirSenha() {
   const router = useRouter();
-  const { resetPassword } = useUser();
+  const { loginRequired, isLoading, resetPassword } = useUser();
+
+  useEffect(() => {
+    loginRequired();
+  }, [isLoading]);
 
   const {
     register,
@@ -69,20 +74,12 @@ export default function RedefinirSenha() {
 
         <form className={style.form} onSubmit={handleSubmit(onSubmit)}>
           <div className={style.wrapperInputs}>
-            <FormInput
-              label="Senha atual"
-              type="password"
-              {...register("currentPassword")}
-            />
+            <FormInput label="Senha atual" type="password" {...register("currentPassword")} />
             {errors.currentPassword && (
               <span className={style.error}>{errors.currentPassword.message}</span>
             )}
 
-            <FormInput
-              label="Nova senha"
-              type="password"
-              {...register("newPassword")}
-            />
+            <FormInput label="Nova senha" type="password" {...register("newPassword")} />
             {errors.newPassword && (
               <span className={style.error}>{errors.newPassword.message}</span>
             )}

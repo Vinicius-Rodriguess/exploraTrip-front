@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,7 +30,11 @@ type TripFormData = z.infer<typeof tripSchema>;
 export default function CreateTrip() {
   const [step, setStep] = useState<"info" | "budget">("info");
   const { createTrip, loading } = useTrip();
-  const { user } = useUser();
+  const { user, loginRequired, isLoading } = useUser();
+      
+  useEffect(() => {
+    loginRequired();
+  }, [isLoading]);
 
   const {
     register,
